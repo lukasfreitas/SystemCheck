@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-3 my-3 text-white bg-purple rounded-top shadow-sm" style="border-radius: 8px 8px 0 0;">
+  <div class="lh-1">
+    <h1 class="h6 mb-0 text-white lh-1">Informações SMART do Disco ({{ sensor_info.device }})</h1>
+  </div>
+</div>
+
+<!-- Card de informações com barra de rolagem e integração com o topo roxo -->
+<div class="p-3 bg-body rounded-bottom shadow-sm" style="border-radius: 0 0 8px 8px; max-height: 400px; overflow-y: auto;">
+  <h6 class="border-bottom pb-2 mb-0">Informações SMART</h6>
+
+  <!-- Exibindo os dados SMART -->
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Temperatura:</strong>
+    <span>{{ items_data['Temperature'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Horas de Uso:</strong>
+    <span>{{ items_data['Power On Hours'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Ciclos de Energia:</strong>
+    <span>{{ items_data['Power Cycles'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Porcentagem Usada:</strong>
+    <span>{{ items_data['Percentage Used'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Espaço Disponível:</strong>
+    <span>{{ items_data['Available Spare'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Desligamentos Inseguros:</strong>
+    <span>{{ items_data['Unsafe Shutdowns'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Erros de Log:</strong>
+    <span>{{ items_data['Error Log Entries'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Erros de Mídia:</strong>
+    <span>{{ items_data['Media Errors'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Tempo de Controle Ocupado:</strong>
+    <span>{{ items_data['Controller Busy Time'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Unidades de Dados Lidas:</strong>
+    <span>{{ items_data['Data Units Read'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Unidades de Dados Gravadas:</strong>
+    <span>{{ items_data['Data Units Written'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Leituras do Host:</strong>
+    <span>{{ items_data['Host Reads'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Gravações do Host:</strong>
+    <span>{{ items_data['Host Writes'] }}</span>
+  </div>
+
+  <hr>
+</div>
+{% endblock %}

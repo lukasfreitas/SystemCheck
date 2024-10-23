@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-3 my-3 text-white bg-purple rounded-top shadow-sm" style="border-radius: 8px 8px 0 0;">
+  <div class="lh-1">
+    <h1 class="h6 mb-0 text-white lh-1">Informações do Sistema de Arquivos</h1>
+  </div>
+</div>
+
+<!-- Card de informações com barra de rolagem e integração com o topo roxo -->
+<div class="p-3 bg-body rounded-bottom shadow-sm" style="border-radius: 0 0 8px 8px; max-height: 400px; overflow-y: auto;">
+  <h6 class="border-bottom pb-2 mb-0">Sistema de Arquivos Montados</h6>
+
+  {% for fs in filesystem_info.file_systems %}
+  <div class="py-2 border-bottom">
+    <div class="d-flex">
+      <strong class="text-gray-dark me-2">Nome:</strong>
+      <span>{{ fs.name }}</span>
+    </div>
+
+    <div class="d-flex">
+      <strong class="text-gray-dark me-2">Tamanho:</strong>
+      <span>{{ fs.size }}</span>
+    </div>
+
+    <div class="d-flex">
+      <strong class="text-gray-dark me-2">Ponto de Montagem:</strong>
+      <span>{{ fs.mountpoint }}</span>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

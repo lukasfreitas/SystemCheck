@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
+    <meta name="generator" content="Hugo 0.84.0" />
+    <title>SystemCheck</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='assets/dist/css/bootstrap.min.css') }}" rel="stylesheet" />
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      /* Adicionando espaço abaixo da barra de navegação */
+      .navbar {
+        margin-bottom: 20px;
+      }
+
+      /* Estilos para adicionar o efeito de sombreamento ao conteúdo */
+      main.container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        margin-top: 20px;
+      }
+      
+      body.bg-light {
+        background-color: #f8f9fa !important; /* Certifique-se de que o fundo fora do container seja diferente */
+      }
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='offcanvas.css') }}" rel="stylesheet" />
+  </head>
+
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">SystemCheck</a>
+        <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{ url_for('home') }}">Dashboard</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">
+                Informações de Sistema
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                <li><a class="dropdown-item" href="{{ url_for('distro') }}">Distro</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('kernel') }}">Kernel</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('cpu') }}">CPU</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-bs-toggle="dropdown" aria-expanded="false">
+                Hardware
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown02">
+                <li><a class="dropdown-item" href="{{ url_for('memory') }}">Memória</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('disk') }}">Disco</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('filesystem') }}">Sistema de Arquivos</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('network') }}">Rede</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('sensors') }}">Sensores</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('battery') }}">Bateria</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('uptime') }}">Uptime</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container">
+      {% block content %}
+      {% endblock %}
+    </main>
+
+    <script src="{{ url_for('static', filename='assets/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='offcanvas.js') }}"></script>
+  </body>
+</html>

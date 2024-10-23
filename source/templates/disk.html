@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-3 my-3 text-white bg-purple rounded-top shadow-sm" style="border-radius: 8px 8px 0 0;">
+  <div class="lh-1">
+    <h1 class="h6 mb-0 text-white lh-1">Informações de Disco</h1>
+  </div>
+</div>
+
+<div class="p-3 bg-body rounded-bottom shadow-sm" style="border-radius: 0 0 8px 8px; max-height: 400px; overflow-y: auto;">
+  <form method="GET" action="{{ url_for('disk') }}" class="mb-3">
+    <label for="filesystem" class="form-label">Escolha um filesystem:</label>
+    <select id="filesystem" name="filesystem" class="form-select" style="max-width: 300px;" onchange="this.form.submit()">
+      <option value="">Selecione</option>
+      {% for fs in file_systems %}
+      <option value="{{ fs.source }}" {% if selected_data and selected_data.source == fs.source %}selected{% endif %}>
+        {{ fs.source }} ({{ fs.fstype }})
+      </option>
+      {% endfor %}
+    </select>
+  </form>
+
+  {% if selected_data %}
+  <div class="mt-4">
+    <h6 class="border-bottom pb-2 mb-0">Informações do Filesystem</h6>
+    <div class="row">
+      <div class="col-md-6">
+        <p><strong>Source:</strong> {{ selected_data.source }}</p>
+        <p><strong>Tipo de Sistema de Arquivo:</strong> {{ selected_data.fstype }}</p>
+        <p><strong>Ponto de Montagem:</strong> {{ selected_data.mountpoint }}</p>
+      </div>
+      <div class="col-md-6">
+        <p><strong>Tamanho Total:</strong> {{ selected_data.size }}</p>
+        <p><strong>Usado:</strong> {{ selected_data.used }}</p>
+        <p><strong>Disponível:</strong> {{ selected_data.available }}</p>
+        <p><strong>Percentual Usado:</strong> {{ selected_data.use_percentage }}</p>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

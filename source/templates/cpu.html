@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
+  <div class="lh-1">
+    <h1 class="h6 mb-0 text-white lh-1">Informações da CPU</h1>
+  </div>
+</div>
+
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+  <h6 class="border-bottom pb-2 mb-0">Detalhes da CPU</h6>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Arquitetura:</strong>
+    <span>{{ cpu_data['architecture'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Modos de Operação:</strong>
+    <span>{{ cpu_data['cpu_op_modes'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Tamanhos de Endereço:</strong>
+    <span>{{ cpu_data['address_sizes'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Ordem de Bytes:</strong>
+    <span>{{ cpu_data['byte_order'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Total de CPUs:</strong>
+    <span>{{ cpu_data['cpus'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">CPUs Online:</strong>
+    <span>{{ cpu_data['online_cpus'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Vendor ID:</strong>
+    <span>{{ cpu_data['vendor_id'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Nome do Modelo:</strong>
+    <span>{{ cpu_data['model_name'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Família de CPU:</strong>
+    <span>{{ cpu_data['cpu_family'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Modelo:</strong>
+    <span>{{ cpu_data['model'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Threads por Núcleo:</strong>
+    <span>{{ cpu_data['threads_per_core'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Núcleos por Socket:</strong>
+    <span>{{ cpu_data['cores_per_socket'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Sockets:</strong>
+    <span>{{ cpu_data['sockets'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Stepping:</strong>
+    <span>{{ cpu_data['stepping'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Frequência Máxima:</strong>
+    <span>{{ cpu_data['cpu_max_mhz'] }} MHz</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Frequência Mínima:</strong>
+    <span>{{ cpu_data['cpu_min_mhz'] }} MHz</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">BogoMIPS:</strong>
+    <span>{{ cpu_data['bogomips'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Cache L1d:</strong>
+    <span>{{ cpu_data['l1d_cache'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Cache L1i:</strong>
+    <span>{{ cpu_data['l1i_cache'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Cache L2:</strong>
+    <span>{{ cpu_data['l2_cache'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Cache L3:</strong>
+    <span>{{ cpu_data['l3_cache'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Virtualização:</strong>
+    <span>{{ cpu_data['virtualization'] }}</span>
+  </div>
+
+  <div class="d-flex text-muted pt-3">
+    <strong class="d-block text-gray-dark">Flags:</strong>
+    <span>{{ cpu_data['flags'] }}</span>
+  </div>
+</div>
+
+{% endblock %}

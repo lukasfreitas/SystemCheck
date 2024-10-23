@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
+  <div class="lh-1">
+    <h1 class="h6 mb-0 text-white lh-1">Informações de Uptime</h1>
+    <small>Última atualização: {{ last_update }}</small>
+  </div>
+</div>
+
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+  <h6 class="border-bottom pb-2 mb-0">Tempo de Atividade da Máquina</h6>
+
+  <div class="d-flex text-muted pt-3">
+    <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+      <strong class="d-block text-gray-dark">Uptime:</strong>
+      {{ items_data['Tempo de Atividade'] }}
+    </div>
+  </div>
+</div>
+{% endblock %}

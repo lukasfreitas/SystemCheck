@@ -1,0 +1,20 @@
+version: v3
+teleport:
+  nodename: "localhost"
+  log:
+    output: stderr
+    severity: INFO
+  data_dir: /var/lib/teleport
+
+auth_service:
+  enabled: true
+  cluster_name: "localcluster"
+
+proxy_service:
+  enabled: true
+  web_listen_addr: 0.0.0.0:3080        # Porta para tráfego web HTTP/HTTPS que vai redirecionar para o Flask
+  public_addr: "localhost:3080"        # O endereço público que será acessível
+
+ssh_service:
+  enabled: true
+  listen_addr: 0.0.0.0:3022            # Porta SSH usada pelos clientes

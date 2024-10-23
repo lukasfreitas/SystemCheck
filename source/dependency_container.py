@@ -19,6 +19,7 @@ class DependencyContainer:
         return self.distro_info
 
     def get_cpu_info(self):
+        self.cpu_info.refresh() 
         return self.cpu_info
 
     def get_memory_info(self):

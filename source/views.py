@@ -1,6 +1,7 @@
 from flask import render_template, request
 from dependency_container import DependencyContainer  # Importa o contêiner de dependências
-
+from parsers import parse_cpu_info_with_bert
+import json
 container = DependencyContainer()
 
 # View para a página inicial
@@ -9,7 +10,6 @@ def home():
 
 # View para a página de informações da distribuição do sistema
 def distro_data():
-    print('aaaaaaaaaaaaaaaaaaaaaaa')
     distro_info = container.get_distro_info()
     context = {
         'items_data': {
@@ -28,41 +28,29 @@ def kernel_data():
     return render_template('kernel.html', kernel_info=kernel_info)
 
 # View para a página de informações da CPU
+# Função de coleta de dados da CPU
 def cpu_data():
-    container.refresh_all()  # Atualiza todas as informações
+    print("Container atualizado")
+
+    # Obtenha os dados da CPU do container (saída do comando lscpu)
     cpu_info = container.get_cpu_info()
 
-    # Coletar as informações da CPU
-    cpu_data = {
-        'architecture': cpu_info.architecture,
-        'cpu_op_modes': cpu_info.cpu_op_modes,
-        'address_sizes': cpu_info.address_sizes,
-        'byte_order': cpu_info.byte_order,
-        'cpus': cpu_info.cpus,
-        'online_cpus': cpu_info.online_cpus,
-        'vendor_id': cpu_info.vendor_id,
-        'model_name': cpu_info.model_name,
-        'cpu_family': cpu_info.cpu_family,
-        'model': cpu_info.model,
-        'threads_per_core': cpu_info.threads_per_core,
-        'cores_per_socket': cpu_info.cores_per_socket,
-        'sockets': cpu_info.sockets,
-        'stepping': cpu_info.stepping,
-        'cpu_scaling_mhz': cpu_info.cpu_scaling_mhz,
-        'cpu_max_mhz': cpu_info.cpu_max_mhz,
-        'cpu_min_mhz': cpu_info.cpu_min_mhz,
-        'bogomips': cpu_info.bogomips,
-        'flags': cpu_info.flags,
-        'virtualization': cpu_info.virtualization,
-        'l1d_cache': cpu_info.l1d_cache,
-        'l1i_cache': cpu_info.l1i_cache,
-        'l2_cache': cpu_info.l2_cache,
-        'l3_cache': cpu_info.l3_cache,
-        'numa_nodes': cpu_info.numa_nodes,
-        'vulnerabilities': cpu_info.vulnerabilities
-    }
+    # Verifique se cpu_info já é uma string; se não, converta-o adequadamente
+    if isinstance(cpu_info, dict):
+        cpu_info_text = json.dumps(cpu_info)  # Converta para string se for um dicionário
+    else:
+        cpu_info_text = str(cpu_info)  # Apenas converta diretamente para string
 
-    return render_template('cpu.html', cpu_data=cpu_data)
+    print(f"Saída do comando lscpu: {cpu_info_text}")
+
+    # Utiliza o modelo BERT para parsear os dados
+    print("Iniciando o parsing das informações com BERT...")
+    cpu_parsed_data = parse_cpu_info_with_bert(cpu_info_text)
+
+    print("Renderizando o template com os dados da CPU...")
+    # Retornar os dados da CPU para a view
+    return render_template('cpu.html', cpu_data=cpu_parsed_data)
+
 
 
 # View para a página de informações da memória

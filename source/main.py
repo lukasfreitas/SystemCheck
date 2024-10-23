@@ -1,9 +1,8 @@
 from flask import Flask
 from config import configurations
 from urls import init_routes
+from transformers import BertTokenizer, BertForTokenClassification
 import os
-import subprocess
-import threading
 
 app = Flask(__name__, static_folder='static')
 
@@ -14,51 +13,31 @@ app.config.from_object(configurations[config_name])
 # Adicionando as rotas
 init_routes(app)
 
-# Função para monitorar os logs do Teleport
-def monitor_teleport_logs(process):
-    print("Monitorando logs do Teleport...")
+# Função para carregar o modelo BERT na inicialização
+def load_bert_model():
+    print("Carregando o modelo BERT...")
     try:
-        # Verificar e imprimir a saída padrão (stdout) e saída de erro (stderr)
-        while True:
-            output = process.stdout.readline()
-            if output == '' and process.poll() is not None:
-                break
-            if output:
-                print(f"Log Teleport (stdout): {output.strip()}")
-        
-        # Verificar a saída de erro
-        stderr = process.stderr.read()
-        if stderr:
-            print(f"Erro Teleport (stderr): {stderr.strip()}")
-
+        tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+        model = BertForTokenClassification.from_pretrained('bert-base-uncased')
+        print("Modelo BERT carregado com sucesso.")
+        return tokenizer, model
     except Exception as e:
-        print(f"Erro ao monitorar os logs do Teleport: {e}")
-
-# Função para iniciar o Teleport
-def start_teleport():
-    print(f"Iniciando o Teleport para expor a aplicação...")
-
-    try:
-        # Executar o comando para expor o serviço com Teleport
-        process = subprocess.Popen(
-            ['sudo', 'teleport', 'start', '--config=teleport.yaml'],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True
-        )
-        print("Comando Teleport executado.")
-
-        # Criar uma thread para monitorar os logs
-        log_thread = threading.Thread(target=monitor_teleport_logs, args=(process,))
-        log_thread.start()
-
-    except Exception as e:
-        print(f"Erro ao iniciar o Teleport: {e}")
+        print(f"Erro ao carregar o modelo BERT: {e}")
+        return None, None
 
 if __name__ == "__main__":
     # Iniciar o Teleport para expor a aplicação Flask
     print("Iniciando a aplicação Flask...")
-    start_teleport()
+
+    # Carregar o modelo BERT na inicialização
+    tokenizer, model = load_bert_model()
+
+    # Verifica se o modelo foi carregado corretamente
+    if tokenizer and model:
+        # Passar o modelo carregado para o `parsers.py`
+        import parsers
+        parsers.initialize_model(tokenizer, model)
+        print("Modelo BERT pronto para uso.")
 
     print(f"Executando o servidor Flask...")
     # Executa o servidor Flask

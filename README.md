@@ -40,7 +40,7 @@ make install
   - Depois de instalar as dependências, você pode executar o script para coletar os dados que serão utilizados no treinamento do modelo:
 
 ```bash
-make install
+./collect_system_data.sh
 ```
 
 ### Contribuições
